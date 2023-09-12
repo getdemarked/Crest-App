@@ -45,11 +45,12 @@ const Home: NextPage = () => {
               Login in your wallet to get started now!
             </Text>
             <ConnectWallet 
-            w="80%"
-        btnTitle="Login" 
-        modalTitle="Login"
+            
+        btnTitle="Create Account Now" 
+        modalTitle="Create Account Now"
+        theme="dark"
         detailsBtn={() => {
-            return <button> Create Account Now </button>;
+            return <button> Logged In </button>;
         }}
 
         />
