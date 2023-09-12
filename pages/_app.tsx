@@ -32,14 +32,14 @@ function MyApp({ Component, pageProps }: AppProps) {
     ]}
     supportedWallets={
       [
-        /*
+        
         paperWallet({
           paperClientId: 'dd2a7b91-e862-4542-b6cd-1a6e8e23b277',
-        }),*/
-        
+        }),
+        /*
         magicLink({
           apiKey: 'pk_live_620BAEFEB70A9317', 
-        }),
+        }),*/
         /*
           smartWallet({
           factoryAddress: "",
