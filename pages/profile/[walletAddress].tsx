@@ -43,7 +43,8 @@ export default function AccountPage() {
                     <Flex flexDirection={"column"} mr={[0, 0, 8]} p={10} alignItems={["center"]}>
                         <Avatar size={"2xl"} mb={4}/>
                         <Flex alignItems="center" mt={[4, 4, 0]}>
-                            <Text as='b'>UID:</Text>
+                            <Text as='b'>UID</Text> <br></br></Flex>
+                            <Flex alignItems="center" mt={[4, 4, 0]}>
                             <Text
                                 fontSize={"sm"}
                                 border={"2px solid black"}
