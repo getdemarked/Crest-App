@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Avatar, Container, Flex, Heading, SimpleGrid, Spinner, Text, Button } from "@chakra-ui/react";
-import { useAddress, useContract, useContractRead } from "@thirdweb-dev/react";
+import { useAddress, useContract, useContractRead, useDisconnect  } from "@thirdweb-dev/react";
 import { TRANSFER_CONTRACT_ADDRESS } from "../../const/addresses";
 import BalanceCard from "../../components/BalanceCard";
 
 export default function AccountPage() {
+    const disconnect = useDisconnect();
     const address = useAddress();
     const [isCopied, setIsCopied] = useState(false);
 
@@ -57,6 +58,9 @@ export default function AccountPage() {
                             <Button size="sm" onClick={() => copyToClipboard(address)}>
                                 {isCopied ? "Copied!" : "Copy"}
                             </Button>
+                        </Flex>
+                        <Flex alignItems="center" mt={[4, 4, 0]}>
+                        <Button onClick={disconnect}>Logout</Button>
                         </Flex>
                     </Flex>
                     <Flex flexDirection={"column"} w={"100%"}>

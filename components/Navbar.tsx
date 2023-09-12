@@ -1,11 +1,10 @@
 import React from "react";
 import { Container, Flex, Text, Image } from "@chakra-ui/react";
-import { ConnectWallet, useAddress } from "@thirdweb-dev/react";
+import { ConnectWallet, useAddress, } from "@thirdweb-dev/react";
 import Link from "next/link";
 
 export default function Navbar() {
   const address = useAddress();
-
   return (
     <Container maxW={"1440px"} py={4}>
       <Flex
@@ -35,7 +34,7 @@ export default function Navbar() {
         btnTitle="Login" 
         modalTitle="Login"
         detailsBtn={() => {
-            return <button> Account </button>;
+            return <Text></Text>;
         }}
 
         />
