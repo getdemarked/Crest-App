@@ -50,7 +50,7 @@ const Home: NextPage = () => {
         modalTitle="Create Account Now"
         theme="dark"
         detailsBtn={() => {
-            return <button> Logged In </button>;
+            return <Text>  </Text>;
         }}
 
         />
