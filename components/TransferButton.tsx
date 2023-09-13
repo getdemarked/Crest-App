@@ -47,6 +47,7 @@ export default function TransferButton({ tokenAddress, receiver, amount, message
                 duration: 9000,
                 isClosable: true,
             })}
+            onError={(error) => alert("Something went wrong!")}
         >Transfer</Web3Button>
     );
 }

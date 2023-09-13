@@ -28,7 +28,7 @@ export default function Events() {
 
     return (
         <Box mt={20} w={"100%"}>
-            <Heading>Recent Transfers:</Heading>
+            <Heading>Recent Transactions:</Heading>
             {!isEventsLoading ? (
                 events?.map((event: any, index) => (
                     <Card key={index} p={8} my={4}>

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Box, Card, Flex, Heading, Input, Text, Select } from "@chakra-ui/react";
+import { Box, Card, Flex, Heading, Input, Text, Select, } from "@chakra-ui/react";
 import {
   useAddress,
   useContract,
   useContractRead,
+  ConnectWallet
 } from "@thirdweb-dev/react";
 import { TRANSFER_CONTRACT_ADDRESS } from "../const/addresses";
 import TokenSelection from "./TokenSelection";
@@ -11,8 +12,9 @@ import TokenBalance from "./TokenBalance";
 import TransferButton from "./TransferButton";
 import styles from "../styles/Home.module.css";
 
+
 export default function TransferCard() {
-    
+
   const address = useAddress();
 
   const { contract } = useContract(TRANSFER_CONTRACT_ADDRESS);
@@ -100,7 +102,15 @@ export default function TransferCard() {
             message={formData.message}
           />
         ) : (
-          <Text>Please login to make a transfer.</Text>
+            <ConnectWallet 
+            
+        btnTitle="Please Login to Transfer" 
+        modalTitle="Login"
+        theme="dark"
+        detailsBtn={() => {
+            return <Text>  </Text>;
+        }}/>
+          
         )}
       </Box>
     </Card>

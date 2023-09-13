@@ -47,7 +47,7 @@ const Home: NextPage = () => {
             <ConnectWallet 
             
         btnTitle="Create Account Now" 
-        modalTitle="Create Account Now"
+        modalTitle="Login"
         theme="dark"
         detailsBtn={() => {
             return <Text>  </Text>;
