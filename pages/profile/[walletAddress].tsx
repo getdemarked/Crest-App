@@ -60,6 +60,10 @@ export default function AccountPage() {
                             </Button>
                         </Flex>
                         <Flex alignItems="center" mt={[4, 4, 0]}>
+                        <br></br>
+                        <br></br>
+                        <br></br>
+                        <br></br>
                         <Button onClick={disconnect}>Logout</Button>
                         </Flex>
                     </Flex>

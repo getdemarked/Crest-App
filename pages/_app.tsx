@@ -58,6 +58,13 @@ function MyApp({ Component, pageProps }: AppProps) {
         localWallet(),
       ]
     }
+    sdkOptions={{
+      gasless: {
+        openzeppelin:{
+          relayerUrl: process.env.RELAYER_WEBHOOK_URL as string
+        }
+      }
+    }}
     >
       <ChakraProvider>
         <Navbar />
