@@ -40,6 +40,7 @@ export default function TransferButton({ tokenAddress, receiver, amount, message
                     ]
                 );
             }}
+            onSubmit={() => console.log("Transaction submitted")}
             onSuccess={() => toast({
                 title: 'Transfer Successful',
                 description: "You have successfully transferred an asset",

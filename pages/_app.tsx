@@ -32,10 +32,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     ]}
     supportedWallets={
       [
-        smartWallet({
-          factoryAddress: "0x4Ddf33Ffc79eaB7b242d9D20047D767871D26a83",
-          gasless: true,
-          personalWallets: [
+        
         paperWallet({
           paperClientId: 'dd2a7b91-e862-4542-b6cd-1a6e8e23b277',
         }),
@@ -43,7 +40,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         magicLink({
           apiKey: 'pk_live_620BAEFEB70A9317',
         }),
-        /*
+        
           smartWallet({
           factoryAddress: "0x4Ddf33Ffc79eaB7b242d9D20047D767871D26a83",
           gasless: true,
@@ -58,8 +55,6 @@ function MyApp({ Component, pageProps }: AppProps) {
         trustWallet(),
         safeWallet(),
         localWallet(),
-          ]
-    })
       ]
     }
     
