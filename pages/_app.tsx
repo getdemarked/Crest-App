@@ -26,7 +26,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThirdwebProvider 
     activeChain={activeChain} 
-    clientId='fc9bd1dd3f5f9e7ff1ed201754bf23a3'
+    clientId='cb72ef930a22b6ef0ea75f1888be248f'
     supportedChains={[
       Polygon
     ]}
