@@ -26,13 +26,16 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThirdwebProvider 
     activeChain={activeChain} 
-    clientId='cb72ef930a22b6ef0ea75f1888be248f'
+    clientId="cb72ef930a22b6ef0ea75f1888be248f"
     supportedChains={[
       Polygon
     ]}
     supportedWallets={
       [
-        
+        smartWallet({
+          factoryAddress: "0x4Ddf33Ffc79eaB7b242d9D20047D767871D26a83",
+          gasless: true,
+          personalWallets: [
         paperWallet({
           paperClientId: 'dd2a7b91-e862-4542-b6cd-1a6e8e23b277',
         }),
@@ -42,9 +45,8 @@ function MyApp({ Component, pageProps }: AppProps) {
         }),
         /*
           smartWallet({
-          factoryAddress: "",
-          thirdwebApiKey: "",
-          gasless: false,
+          factoryAddress: "0x4Ddf33Ffc79eaB7b242d9D20047D767871D26a83",
+          gasless: true,
           personalWallets: [
             metamaskWallet(),
             localWallet()
@@ -56,8 +58,11 @@ function MyApp({ Component, pageProps }: AppProps) {
         trustWallet(),
         safeWallet(),
         localWallet(),
+          ]
+    })
       ]
     }
+    
     >
       <ChakraProvider>
         <Navbar />
