@@ -41,6 +41,7 @@ export default function TransferButton({ tokenAddress, receiver, amount, message
                 );
             }}
             onSubmit={() => console.log("Transaction submitted")}
+            onError={(error) => alert("Something went wrong!")}
             onSuccess={() => toast({
                 title: 'Transfer Successful',
                 description: "You have successfully transferred an asset",
@@ -48,7 +49,6 @@ export default function TransferButton({ tokenAddress, receiver, amount, message
                 duration: 9000,
                 isClosable: true,
             })}
-            onError={(error) => alert("Something went wrong!")}
         >Transfer</Web3Button>
     );
 }
