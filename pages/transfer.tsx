@@ -7,7 +7,6 @@ export default function TransferPage() {
         <Container maxW={"1440px"}>
             <Flex flexDirection={"column"} justifyContent={"center"} alignItems={"center"}>
                 <TransferCard />
-                <Events />
             </Flex>
         </Container>
     );
