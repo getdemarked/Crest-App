@@ -35,9 +35,8 @@ const Home: NextPage = () => {
         >
           
           <Stack spacing={4}>
-            <Heading fontSize={{ base: "2xl", md: "xl" }}>Crest</Heading>
             <Heading bgGradient='linear(to-l, #000000, #007639)' bgClip='text' fontWeight='extrabold' fontSize={{ base: "5xl", md: "6xl" }}>
-              Send Money to your Friends and Family across any Country with ease.
+              Send Money to your Filipino Friends and Family from any Country with ease.
             </Heading>
             <Text fontSize={{ base: "md", md: "xl" }}>
               Select from a selection of currency to transfer to your friends and
@@ -45,12 +44,18 @@ const Home: NextPage = () => {
               Login in your wallet to get started now!
             </Text>
             <ConnectWallet 
-            
-        btnTitle="Create Account Now" 
-        modalTitle="Login"
-        theme="dark"
+        theme={"dark"}
+        btnTitle={"Create an Account Now!"}
+        modalTitle={"Login"}
+        switchToActiveChain={true}
+        modalSize={"wide"}
+        welcomeScreen={{
+          subtitle:
+            "Login to access your account",
+        }}
+        modalTitleIconUrl={"#"}
         detailsBtn={() => {
-            return <Text>  </Text>;
+            return <Text></Text>;
         }}
 
         />
@@ -87,7 +92,7 @@ const Home: NextPage = () => {
               step={"03"}
               title={"Write a Message"}
               description={
-                "Add an optional message to your token transfer."
+                "Add an optional message to your asset transfer."
               }
             />
           </Stack>
