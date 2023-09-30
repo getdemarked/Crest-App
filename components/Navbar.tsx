@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Flex, Text, Image } from "@chakra-ui/react";
-import { ConnectWallet, useAddress, } from "@thirdweb-dev/react";
+import { ThirdwebProvider, ConnectWallet, useAddress, darkTheme } from "@thirdweb-dev/react";
 import Link from "next/link";
 
 export default function Navbar() {
@@ -31,8 +31,18 @@ export default function Navbar() {
           </Flex>
         )}
         <ConnectWallet 
-        btnTitle="Login" 
-        modalTitle="Login"
+        theme={darkTheme({
+          accentText: "#00611d",
+        })}
+        btnTitle={"Login"}
+        modalTitle={"Login"}
+        switchToActiveChain={true}
+        modalSize={"wide"}
+        welcomeScreen={{
+          subtitle:
+            "Login to access your account",
+        }}
+        modalTitleIconUrl={"#"}
         detailsBtn={() => {
             return <Text></Text>;
         }}

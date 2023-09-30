@@ -23,6 +23,7 @@ export default function TransferButton({ tokenAddress, receiver, amount, message
 
     return (
         <Web3Button
+            theme="dark"
             contractAddress={TRANSFER_CONTRACT_ADDRESS}
             action={async (contract) => {
                 await tokenContract?.setAllowance(
@@ -41,7 +42,6 @@ export default function TransferButton({ tokenAddress, receiver, amount, message
                 );
             }}
             onSubmit={() => console.log("Transaction submitted")}
-            onError={(error) => alert("Something went wrong!")}
             onSuccess={() => toast({
                 title: 'Transfer Successful',
                 description: "You have successfully transferred an asset",
@@ -49,6 +49,7 @@ export default function TransferButton({ tokenAddress, receiver, amount, message
                 duration: 9000,
                 isClosable: true,
             })}
+            onError={(error) => alert("Something went wrong!")}
         >Transfer</Web3Button>
     );
 }

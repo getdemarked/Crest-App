@@ -1,26 +1,21 @@
-import React, { useState } from "react";
-import { Box, Card, Flex, Heading, Input, Text, Select, } from "@chakra-ui/react";
-import {
-  useAddress,
-  useContract,
-  useContractRead,
-  ConnectWallet
-} from "@thirdweb-dev/react";
+import { Box, Card, Flex, Heading, Input, Text } from "@chakra-ui/react";
+import { useAddress, useContract, useContractRead } from "@thirdweb-dev/react";
 import { TRANSFER_CONTRACT_ADDRESS } from "../const/addresses";
 import TokenSelection from "./TokenSelection";
+import { useState } from "react";
 import TokenBalance from "./TokenBalance";
 import TransferButton from "./TransferButton";
 import styles from "../styles/Home.module.css";
 
-
 export default function TransferCard() {
-
   const address = useAddress();
 
   const { contract } = useContract(TRANSFER_CONTRACT_ADDRESS);
 
-  const { data: verifiedTokens, isLoading: isVerifiedTokensLoading } =
-    useContractRead(contract, "getVerifiedTokens");
+  const {
+    data: verifiedTokens,
+    isLoading: isVerifiedTokensLoading,
+  } = useContractRead(contract, "getVerifiedTokens");
 
   const [formData, setFormData] = useState({
     receiver: "",
@@ -30,52 +25,54 @@ export default function TransferCard() {
 
   const [selectedToken, setSelectedToken] = useState("");
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>, name: string) => {
+  const handleChange = (event: any, name: any) => {
     setFormData((prevState) => ({
       ...prevState,
       [name]: event.target.value,
     }));
   };
 
-  const handleTokenSelection = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedToken(event.target.value);
+  const handleTokenSelection = (tokenAddress: string) => {
+    setSelectedToken(tokenAddress);
   };
 
   return (
-    <Card p={4} mx="row" width="100%" maxW="400px">
-      <Heading size="md">Transfer Asset</Heading>
+    <Card p={4} width={["100%", "80%", "50%"]}> {/* Adjust card width */}
+      <Heading>Transfer:</Heading>
 
-      <Text mt={2} fontWeight="bold">
-        Select Asset:
+      <Text mt={4} fontWeight="bold">
+        Select Token:
       </Text>
-      <Select
-        mt={2}
-        onChange={handleTokenSelection}
-        value={selectedToken}
-      >
+      <Flex flexDirection="row" mt={4} flexWrap="wrap"> {/* Use flexbox for token buttons */}
         {!isVerifiedTokensLoading &&
           verifiedTokens.map((token: string) => (
-            <option key={token} value={token}>
+            <Box
+              key={token}
+              onClick={() => handleTokenSelection(token)}
+              className={styles.tokenButton}
+              flexBasis={["50%", "30%", "20%"]} // Adjust button size
+              padding={2} // Add padding to buttons
+            >
               <TokenSelection
                 tokenAddress={token}
                 isSelected={selectedToken === token}
               />
-            </option>
+            </Box>
           ))}
-      </Select>
+      </Flex>
 
       <TokenBalance tokenAddress={selectedToken} />
 
-      <Text mt={2} fontWeight="bold">
+      <Text mt={4} fontWeight="bold">
         Send To:
       </Text>
       <Input
-        placeholder="Enter UID here"
+        placeholder="Enter UID"
         type="text"
         value={formData.receiver}
         onChange={(event) => handleChange(event, "receiver")}
       />
-      <Text mt={2} fontWeight="bold">
+      <Text mt={4} fontWeight="bold">
         Amount:
       </Text>
       <Input
@@ -84,11 +81,11 @@ export default function TransferCard() {
         value={formData.amount}
         onChange={(event) => handleChange(event, "amount")}
       />
-      <Text mt={2} fontWeight="bold">
+      <Text mt={4} fontWeight="bold">
         Message:
       </Text>
       <Input
-        placeholder="Add short message here."
+        placeholder="Add a short message here."
         type="text"
         value={formData.message}
         onChange={(event) => handleChange(event, "message")}
@@ -102,15 +99,7 @@ export default function TransferCard() {
             message={formData.message}
           />
         ) : (
-            <ConnectWallet 
-            
-        btnTitle="Please Login to Transfer" 
-        modalTitle="Login"
-        theme="dark"
-        detailsBtn={() => {
-            return <Text>  </Text>;
-        }}/>
-          
+          <Text>Please log in to transfer</Text>
         )}
       </Box>
     </Card>

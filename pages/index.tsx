@@ -93,56 +93,6 @@ const Home: NextPage = () => {
           </Stack>
         </Flex>
       </SimpleGrid>
-      <br></br><br></br><br></br>
-      <Center><Heading>How to Withdraw?</Heading></Center>
-      <SimpleGrid columns={{ base: 1, md: 2 }} spacing={4} mt={4}>
-        <Flex
-          flexDirection="column"
-          justifyContent="center"
-          alignItems="center"
-        >
-          <Stack spacing={4}>
-            <FeatureCard
-              step={"01"}
-              title={"Select an Asset"}
-              description={
-                "Select from a list of verified Asset to send to your friends and family."
-              }
-            />
-            <FeatureCard
-              step={"02"}
-              title={"Input a Bank Destination"}
-              description={
-                "Input bank name e.g. PNB"
-              }
-            />
-            <FeatureCard
-              step={"03"}
-              title={"Write a Message"}
-              description={
-                "Add an optional message to your token transfer."
-              }
-            />
-            <FeatureCard
-              step={"04"}
-              title={"Write a Message"}
-              description={
-                "Add an optional message to your token transfer."
-              }
-            />
-            <FeatureCard
-              step={"05"}
-              title={"Write a Message"}
-              description={
-                "Add an optional message to your token transfer."
-              }
-            />
-          </Stack>
-        </Flex>
-        <Box>
-          <MediaRenderer src={FEATURES_IMAGE_URL} height="100%" width="100%" />
-        </Box>
-      </SimpleGrid>
     </Container>
   );
 };
