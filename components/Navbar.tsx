@@ -31,9 +31,7 @@ export default function Navbar() {
           </Flex>
         )}
         <ConnectWallet 
-        theme={darkTheme({
-          accentText: "#00611d",
-        })}
+        theme={"dark"}
         btnTitle={"Login"}
         modalTitle={"Login"}
         switchToActiveChain={true}
