@@ -25,6 +25,12 @@ export default function Navbar() {
             <Link href={"/transfer"}>
               <Text mr={8}>Transfer</Text>
             </Link>
+            <Link href={"/claim"}>
+              <Text mr={8}>Claim</Text>
+            </Link>
+            <Link href={"/cashinout"}>
+              <Text mr={8}>Cash In and Out</Text>
+            </Link>
             <Link href={`/profile/${address}`}>
               <Text>My Wallet</Text>
             </Link>
