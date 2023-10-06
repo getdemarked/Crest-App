@@ -33,9 +33,9 @@ export default function BalanceCard({ tokenAddress }: Props) {
                     <>
                         <Text fontWeight={"bold"} fontSize={["lg", "xl", "2xl"]}>{contractMetadata.symbol}</Text>
                         <Text>Balance:</Text>
-                        {!isTokenBalanceLoading ? (
+                        {!isTokenBalanceLoading && tokenBalance ? (
                             <Text fontSize={["2xl", "3xl", "4xl"]} fontWeight={"bold"}>
-                                {formatNumberWithCommasAndDecimal(parseFloat(tokenBalance?.displayValue))}
+                                {formatNumberWithCommasAndDecimal(parseFloat(tokenBalance.displayValue))}
                             </Text>
                         ) : (
                             <Spinner />

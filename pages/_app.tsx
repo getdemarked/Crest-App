@@ -16,6 +16,7 @@ import {
 import { ChakraProvider } from "@chakra-ui/react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import Head from "next/head";
 import { Ethereum, Polygon,  } from "@thirdweb-dev/chains"; //mainnet
 import { Mumbai, BaseGoerli } from "@thirdweb-dev/chains"; //testnet
 
@@ -76,6 +77,27 @@ function MyApp({ Component, pageProps }: AppProps) {
     ]}
   >
       <ChakraProvider>
+      <Head>
+  <title>Crest Digital Wallet - Your Secure Financial Wallet</title>
+  <meta
+    name="description"
+    content="Crest Digital Wallet is your trusted and secure Financial wallet. Store, send, and receive funds with ease."
+  />
+  <meta property="og:title" content="Crest Digital Wallet - Your Secure Financial Wallet" />
+<meta property="og:description" content="Crest Digital Wallet is your trusted and secure Financial wallet. Store, send, and receive funds with ease." />
+<meta property="og:image" content="https://example.com/your-image.jpg" /> 
+<meta property="og:url" content="https://facebook.com/CrestDigitalWallet" /> 
+<meta property="og:type" content="website" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Crest Digital Wallet - Your Secure Financial Wallet" />
+<meta name="twitter:description" content="Crest Digital Wallet is your trusted and secure Financial wallet. Store, send, and receive funds with ease." />
+<meta name="twitter:image" content="https://example.com/your-image.jpg" /> 
+<meta name="twitter:url" content="https://twitter.com/CrestDigitalWallet" /> 
+
+
+</Head>
+
         <Navbar />
         <Component {...pageProps} />
         <Footer />
