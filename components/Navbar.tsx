@@ -90,6 +90,28 @@ export default function Navbar() {
             <ModalCloseButton />
             <ModalBody>
               <Stack spacing={4}>
+                <ConnectWallet
+                  theme={"dark"}
+                  btnTitle={"Login"}
+                  modalTitle={"Login"}
+                  switchToActiveChain={true}
+                  modalSize={"wide"}
+                  welcomeScreen={{
+                    img: {
+                      src: "https://raw.githubusercontent.com/getdemarked/Crest-App/main/public/crest_icon_logo_colored_nobg.png",
+                      width: 150,
+                      height: 150,
+                    },
+                    subtitle:
+                      "Login to access your account",
+                  }}
+                  modalTitleIconUrl={
+                    "https://raw.githubusercontent.com/getdemarked/Crest-App/main/public/favicon.ico"
+                  }
+                  detailsBtn={() => {
+                    return <Text></Text>;
+                  }}
+                />
                 {address && (
                   <>
                     <Link href={"/transfer"}>
@@ -110,28 +132,6 @@ export default function Navbar() {
                     <Link href={`/profile/${address}`}>
                       <Text onClick={closeMenu}>My Wallet</Text>
                     </Link>
-                    <ConnectWallet
-                      theme={"dark"}
-                      btnTitle={"Login"}
-                      modalTitle={"Login"}
-                      switchToActiveChain={true}
-                      modalSize={"wide"}
-                      welcomeScreen={{
-                        img: {
-                          src: "https://raw.githubusercontent.com/getdemarked/Crest-App/main/public/crest_icon_logo_colored_nobg.png",
-                          width: 150,
-                          height: 150,
-                        },
-                        subtitle:
-                          "Login to access your account",
-                      }}
-                      modalTitleIconUrl={
-                        "https://raw.githubusercontent.com/getdemarked/Crest-App/main/public/favicon.ico"
-                      }
-                      detailsBtn={() => {
-                        return <Text></Text>;
-                      }}
-                    />
                   </>
                 )}
               </Stack>
