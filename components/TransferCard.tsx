@@ -126,10 +126,17 @@ export default function TransferCard() {
                 switchToActiveChain={true}
                 modalSize={"wide"}
                 welcomeScreen={{
+                  img: {
+                    src: "https://raw.githubusercontent.com/getdemarked/Crest-App/main/public/crest_icon_logo_colored_nobg.png",
+                    width: 150,
+                    height: 150,
+                  },
                   subtitle:
-                    "Login to access your account",
+                    "Login to transfer assets",
                 }}
-                modalTitleIconUrl={"#"}
+                modalTitleIconUrl={
+                  "https://raw.githubusercontent.com/getdemarked/Crest-App/main/public/favicon.ico"
+                }
                 detailsBtn={() => {
                     return <Text></Text>;
                 }}

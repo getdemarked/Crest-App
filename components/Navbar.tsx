@@ -117,9 +117,17 @@ export default function Navbar() {
                       switchToActiveChain={true}
                       modalSize={"wide"}
                       welcomeScreen={{
-                        subtitle: "Login to access your account",
+                        img: {
+                          src: "https://raw.githubusercontent.com/getdemarked/Crest-App/main/public/crest_icon_logo_colored_nobg.png",
+                          width: 150,
+                          height: 150,
+                        },
+                        subtitle:
+                          "Login to access your account",
                       }}
-                      modalTitleIconUrl={"#"}
+                      modalTitleIconUrl={
+                        "https://raw.githubusercontent.com/getdemarked/Crest-App/main/public/favicon.ico"
+                      }
                       detailsBtn={() => {
                         return <Text></Text>;
                       }}
