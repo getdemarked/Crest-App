@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Avatar, Container, Flex, Heading, SimpleGrid, Spinner, Text, Button } from "@chakra-ui/react";
-import { useAddress, useContract, useContractRead, useDisconnect  } from "@thirdweb-dev/react";
+import { useAddress, useContract, useContractRead, useDisconnect, ConnectWallet  } from "@thirdweb-dev/react";
 import { TRANSFER_CONTRACT_ADDRESS } from "../../const/addresses";
 import BalanceCard from "../../components/BalanceCard";
 
@@ -55,6 +55,7 @@ export default function AccountPage() {
                             >
                                 {truncateAddress(address)}
                             </Text>
+                            <br></br><br></br>
                             <Button size="sm" onClick={() => copyToClipboard(address)}>
                                 {isCopied ? "Copied!" : "Copy"}
                             </Button>
@@ -85,8 +86,25 @@ export default function AccountPage() {
                 </Flex>
             ) : (
                 <Flex justifyContent="center" alignItems="center" height="100vh">
-                    <Text fontSize="xl">Please Login to continue</Text>
+                    <Text fontSize="xl">Please Login to continue</Text><br></br><br></br> 
+                    <ConnectWallet 
+                theme={"dark"}
+                btnTitle={"Login"}
+                modalTitle={"Login"}
+                switchToActiveChain={true}
+                modalSize={"wide"}
+                welcomeScreen={{
+                  subtitle:
+                    "Login to access your account",
+                }}
+                modalTitleIconUrl={"#"}
+                detailsBtn={() => {
+                    return <Text></Text>;
+                }}
+        
+                />
                 </Flex>
+                
             )}
             
         </Container>
