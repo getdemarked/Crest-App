@@ -86,10 +86,9 @@ export default function AccountPage() {
                 </Flex>
             ) : (
                 <Flex justifyContent="center" alignItems="center" height="100vh">
-                    <Text fontSize="xl">Please Login to continue</Text><br></br><br></br> 
                     <ConnectWallet 
                 theme={"dark"}
-                btnTitle={"Login"}
+                btnTitle={"Click Me to Login"}
                 modalTitle={"Login"}
                 switchToActiveChain={true}
                 modalSize={"wide"}

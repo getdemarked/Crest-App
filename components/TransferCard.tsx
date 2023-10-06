@@ -10,6 +10,7 @@ import {
   useAddress,
   useContract,
   useContractRead,
+  ConnectWallet
 } from "@thirdweb-dev/react";
 import { TRANSFER_CONTRACT_ADDRESS } from "../const/addresses";
 import TokenSelection from "./TokenSelection";
@@ -117,7 +118,24 @@ export default function TransferCard() {
               message={formData.message}
             />
           ) : (
-            <Text>Please log in to transfer</Text>
+
+              <ConnectWallet 
+                theme={"dark"}
+                btnTitle={"Click Me to Transfer"}
+                modalTitle={"Login"}
+                switchToActiveChain={true}
+                modalSize={"wide"}
+                welcomeScreen={{
+                  subtitle:
+                    "Login to access your account",
+                }}
+                modalTitleIconUrl={"#"}
+                detailsBtn={() => {
+                    return <Text></Text>;
+                }}
+        
+                />
+            
           )}
         </Box>
       </Card>
