@@ -8,4 +8,7 @@ const withPWA = require('next-pwa')({
 module.exports = withPWA({
   basePath: "",
   reactStrictMode: true,
+  images: {
+    domains: ['raw.githubusercontent.com'],
+  },
 })

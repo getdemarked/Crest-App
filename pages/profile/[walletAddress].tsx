@@ -3,6 +3,7 @@ import { Avatar, Container, Flex, Heading, SimpleGrid, Spinner, Text, Button } f
 import { useAddress, useContract, useContractRead, useDisconnect, ConnectWallet  } from "@thirdweb-dev/react";
 import { TRANSFER_CONTRACT_ADDRESS } from "../../const/addresses";
 import BalanceCard from "../../components/BalanceCard";
+import ProfilePicture from "../../components/ProfilePicture";
 
 export default function AccountPage() {
     const disconnect = useDisconnect();
@@ -42,7 +43,53 @@ export default function AccountPage() {
             {address ? (
                 <Flex flexDirection={["column", "column", "row"]}>
                     <Flex flexDirection={"column"} mr={[0, 0, 8]} p={10} alignItems={["center"]}>
-                        <Avatar size={"2xl"} mb={4}/>
+                    <ConnectWallet 
+
+                    
+                theme={"dark"}
+                btnTitle={"Click Me to Login"}
+                modalTitle={"Login"}
+                switchToActiveChain={true}
+                modalSize={"wide"}
+                hideTestnetFaucet={true}
+                welcomeScreen={{
+                    img: {
+                      src: "https://raw.githubusercontent.com/getdemarked/Crest-App/main/public/crest_icon_logo_colored_nobg.png",
+                      width: 150,
+                      height: 150,
+                    },
+                    subtitle:
+                      "Login to access your account",
+                  }}
+                  modalTitleIconUrl={
+                    "https://raw.githubusercontent.com/getdemarked/Crest-App/main/public/favicon.ico"
+                  }
+
+                  displayBalanceToken={{
+
+                    80001: "0x1461AE660b8d127e84D293EEc71e3A0BD514B4c1", 
+                
+
+                  }}
+
+                  supportedTokens={{
+                    // use chain id of the network as key and pass an array of tokens to show
+                    // you can directly pass the number or import the chain object from @thirdweb-dev/chains to get the chain id
+                    80001: [
+                      {
+                        address: "0x1461AE660b8d127e84D293EEc71e3A0BD514B4c1", // token contract address
+                        name: "Philippine Stablecoin",
+                        symbol: "XPHP",
+                        icon: "https://assets.coingecko.com/coins/images/9956/small/Badge_Dai.png?1687143508",
+                      },
+                    ],
+                  }}
+
+                  detailsBtn={() => {
+                    return <ProfilePicture />;
+                  }}
+        
+                />
                         <Flex alignItems="center" mt={[4, 4, 0]}>
                             <Text as='b'>UID</Text> <br></br></Flex>
                             <Flex alignItems="center" mt={[4, 4, 0]}>
@@ -55,9 +102,11 @@ export default function AccountPage() {
                             >
                                 {truncateAddress(address)}
                             </Text>
-                            <br></br><br></br>
+                        </Flex>
+                      
+                        <Flex alignItems="center" mt={[4, 4, 0]}>
                             <Button size="sm" onClick={() => copyToClipboard(address)}>
-                                {isCopied ? "Copied!" : "Copy"}
+                                {isCopied ? "Copied!" : "Copy UID"}
                             </Button>
                         </Flex>
                         <Flex alignItems="center" mt={[4, 4, 0]}>
@@ -88,7 +137,7 @@ export default function AccountPage() {
                 <Flex justifyContent="center" alignItems="center" height="100vh">
                     <ConnectWallet 
                 theme={"dark"}
-                btnTitle={"Click Me to Login"}
+                btnTitle={"Please login to continue"}
                 modalTitle={"Login"}
                 switchToActiveChain={true}
                 modalSize={"wide"}
