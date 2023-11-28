@@ -69,13 +69,13 @@ export default function Navbar() {
                 target="_blank"
                 href={"https://www.facebook.com/messages/t/129861473549398"}
               >
-                <Text mr={8}>Cash in</Text>
+                <Text mr={8}>Deposit</Text>
               </Link>
               <Link
                 target="_blank"
                 href={"https://www.facebook.com/messages/t/129861473549398"}
               >
-                <Text mr={8}>Cash out</Text>
+                <Text mr={8}>Withdraw</Text>
               </Link>
               <Link href={`/profile/${address}`}>
                 <Text>My Wallet</Text>
@@ -121,13 +121,13 @@ export default function Navbar() {
                       target="_blank"
                       href={"https://www.facebook.com/messages/t/129861473549398"}
                     >
-                      <Text onClick={closeMenu}>Cash in</Text>
+                      <Text onClick={closeMenu}>Deposit</Text>
                     </Link>
                     <Link
                       target="_blank"
                       href={"https://www.facebook.com/messages/t/129861473549398"}
                     >
-                      <Text onClick={closeMenu}>Cash out</Text>
+                      <Text onClick={closeMenu}>Withdraw</Text>
                     </Link>
                     <Link href={`/profile/${address}`}>
                       <Text onClick={closeMenu}>My Wallet</Text>
