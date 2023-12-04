@@ -6945,6 +6945,11 @@ hoist-non-react-statics@^3.3.1:
   dependencies:
     react-is "^16.7.0"
 
+html5-qrcode@^2.3.8:
+  version "2.3.8"
+  resolved "https://registry.yarnpkg.com/html5-qrcode/-/html5-qrcode-2.3.8.tgz#0b0cdf7a9926cfd4be530e13a51db47592adfa0d"
+  integrity sha512-jsr4vafJhwoLVEDW3n1KvPnCCXWaQfRng0/EEYk1vNcQGcG/htAdhJX0be8YyqMoSz7+hZvOZSTAepsabiuhiQ==
+
 http-https@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/http-https/-/http-https-1.0.0.tgz"
@@ -8077,6 +8082,13 @@ next-pwa@^5.6.0:
     terser-webpack-plugin "^5.3.3"
     workbox-webpack-plugin "^6.5.4"
     workbox-window "^6.5.4"
+
+next-qrcode@^2.5.1:
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/next-qrcode/-/next-qrcode-2.5.1.tgz#71575396cfffcc0f9d94e5635149b76f776a8c29"
+  integrity sha512-ibiS1+p+myjurC1obVIgo7UCjFhxm0SNYTkikahQVmnyzlfREOdUCf2f77Vbz6W6q2zfx5Eww2/20vbgkLNdLw==
+  dependencies:
+    qrcode "^1.5.3"
 
 next-tick@^1.1.0:
   version "1.1.0"

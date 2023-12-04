@@ -4,11 +4,13 @@ import { useAddress, useContract, useContractRead, useDisconnect, ConnectWallet,
 import { TRANSFER_CONTRACT_ADDRESS } from "../../const/addresses";
 import BalanceCard from "../../components/BalanceCard";
 import ProfilePicture from "../../components/ProfilePicture";
+import { useQRCode } from "next-qrcode";
 
 export default function AccountPage() {
     const disconnect = useDisconnect();
     const address = useAddress();
     const [isCopied, setIsCopied] = useState(false);
+    const { Canvas } = useQRCode();
 
     function copyToClipboard(text: string) {
         const textarea = document.createElement("textarea");
@@ -66,7 +68,15 @@ export default function AccountPage() {
                   }
 
                   detailsBtn={() => {
-                    return <ProfilePicture />;
+                    return <Canvas
+                    text={address}
+                    options={{
+                      width: 128,
+                    }}
+                  />
+      
+                    
+                    ;
                   }}
         
                 />

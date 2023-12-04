@@ -1,6 +1,6 @@
 import { Container, Flex, Box } from "@chakra-ui/react";
 import TransferCard from "../components/TransferCard";
-import Events from "../components/Events";
+
 
 export default function TransferPage() {
   return (
@@ -13,6 +13,7 @@ export default function TransferPage() {
           backdropFilter="blur(10px)" // Adjust the blur strength as needed
         >
           <TransferCard />
+          
         </Flex>
       </Container>
     </Box>

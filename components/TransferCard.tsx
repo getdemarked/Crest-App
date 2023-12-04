@@ -7,6 +7,13 @@ import {
   Text,
   FormControl,
   FormLabel,
+  Button, 
+  Modal, 
+  ModalOverlay, 
+  ModalContent, 
+  ModalHeader, 
+  ModalBody, 
+  ModalCloseButton
 } from "@chakra-ui/react";
 import {
   useAddress,
@@ -20,9 +27,13 @@ import { useState } from "react";
 import TokenBalance from "./TokenBalance";
 import TransferButton from "./TransferButton";
 import styles from "../styles/CashInOutForm.module.css";
+import QRScanner from "../components/QRScanner";
+
+
 
 export default function TransferCard() {
   const address = useAddress();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { contract } = useContract(TRANSFER_CONTRACT_ADDRESS);
 
@@ -99,6 +110,18 @@ export default function TransferCard() {
           onChange={(event) => handleChange(event, "receiver")}
         />
       </FormControl>
+
+      <Button onClick={() => setIsModalOpen(true)}>Scan QR Code</Button>
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+  <ModalOverlay />
+  <ModalContent>
+    <ModalHeader>Scan QR Code</ModalHeader>
+    <ModalCloseButton />
+    <ModalBody>
+      <QRScanner />
+    </ModalBody>
+  </ModalContent>
+</Modal>
 
       <FormControl mb={4}>
         <FormLabel>Amount:</FormLabel>
