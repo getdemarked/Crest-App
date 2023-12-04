@@ -9,7 +9,6 @@ import {
   Text,
   Button,
   useClipboard,
-  useColorModeValue,
 } from "@chakra-ui/react";
 import {
   useAddress,
@@ -75,7 +74,6 @@ export default function AccountPage() {
                 textAlign={["center"]}
                 borderRadius={4}
                 pr={2}
-                color={useColorModeValue("gray.800", "white")}
               >
                 {truncateAddress(address)}
               </Text>
