@@ -17,16 +17,14 @@ import { ChakraProvider } from "@chakra-ui/react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Head from "next/head";
-import { Ethereum, Polygon,  } from "@thirdweb-dev/chains"; //mainnet
-import { Mumbai, BaseGoerli } from "@thirdweb-dev/chains"; //testnet
 
 // This is the chain your dApp will work on.
 // Change this to the chain your app is built for.
 // You can also import additional chains from `@thirdweb-dev/chains` and pass them directly.
-const activeChain = "mumbai";
+const activeChain = "base";
 
 const smartWalletOptions = {
-  factoryAddress: "0x07774908c663f249507923d0A77D56d2cbe71a15",
+  factoryAddress: "0xacca204f8d716150e81078d7f83c1157c67cccf5",
   gasless: true,
 };
 
@@ -34,7 +32,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThirdwebProvider 
     activeChain={activeChain} 
-    clientId="ed00a882b22dfd9edeea77c9ce3ab664"
+    clientId="c118bdd32635b3929f8d1aa32c0e5548"
     supportedWallets={[
       smartWallet(
         metamaskWallet(),
@@ -49,21 +47,21 @@ function MyApp({ Component, pageProps }: AppProps) {
         smartWalletOptions,
       ),
       smartWallet(
-        safeWallet({
-          personalWallets: [
-            metamaskWallet(),
-            coinbaseWallet(),
-            walletConnect(),
-          ],
-        }),
-        smartWalletOptions,
-      ),
-      smartWallet(
         localWallet(),
         smartWalletOptions,
       ),
       smartWallet(
-        embeddedWallet({ recommended: true }),
+        embeddedWallet({
+          recommended: true,
+          auth: {
+            options: [
+              "email",
+              "google",
+              "apple",
+              "facebook",
+            ],
+          },
+        }),
         smartWalletOptions,
       ),
       smartWallet(
@@ -75,7 +73,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         smartWalletOptions,
       ),
     ]}
-  >
+    >
       <ChakraProvider>
       <Head>
   <title>Crest Digital Wallet - Your Secure Financial Wallet</title>

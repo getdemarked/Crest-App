@@ -57,7 +57,7 @@
   }
   
   .submitButton {
-    background-color: #006d3a;
+    background: linear-gradient(to right, teal.500, blue.500);
     color: #fff;
     font-size: 18px;
     border: none;
@@ -67,7 +67,7 @@
   }
   
   .submitButton:hover {
-    background-color: #00bb38;
+    background-color: linear-gradient(to right, teal.600, blue.600);
   }
   
   .tokenButton:hover {

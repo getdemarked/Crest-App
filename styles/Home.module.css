@@ -47,7 +47,7 @@
 }
 
 .code {
-  background: #fafafa;
+  background: #004920;
   border-radius: 5px;
   padding: 0.75rem;
   font-size: 1.1rem;
@@ -116,6 +116,24 @@
 }
 .logo img {
   filter: invert(1);
+}
+
+.tokenButton:hover {
+  cursor: pointer;
+}
+
+submitButton {
+  background: linear-gradient(to right, teal.500, blue.500);
+  color: #fff;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.submitButton:hover {
+  background-color: linear-gradient(to right, teal.600, blue.600);
 }
 
 .tokenButton:hover {

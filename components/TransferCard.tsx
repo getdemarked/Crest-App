@@ -5,12 +5,14 @@ import {
   Heading,
   Input,
   Text,
+  FormControl,
+  FormLabel,
 } from "@chakra-ui/react";
 import {
   useAddress,
   useContract,
   useContractRead,
-  ConnectWallet
+  ConnectWallet,
 } from "@thirdweb-dev/react";
 import { TRANSFER_CONTRACT_ADDRESS } from "../const/addresses";
 import TokenSelection from "./TokenSelection";
@@ -49,19 +51,31 @@ export default function TransferCard() {
   };
 
   return (
-    <div className={styles.formContainer}>
-      <Card p={4}>
-        <Heading className={styles.title}>Transfer:</Heading>
+    <Box
+      p={4}
+      borderRadius="lg"
+      boxShadow="md"
+      bg="white"
+      className={styles.formContainer}
+      width={["100%", "100%", "80%", "60%"]} // Adjust the width based on your design needs
+      mx="auto"
+    >
+      <Heading fontSize="xl" mb={4} textAlign="center">
+        Transfer
+      </Heading>
 
-        <Text className={styles.label}>Select Asset:</Text>
-        <Flex flexDirection="row" mt={4} flexWrap="wrap">
+      <FormControl mb={4}>
+        <FormLabel>Select Asset:</FormLabel>
+        <Flex flexDirection="row" mt={2} flexWrap="wrap">
           {!isVerifiedTokensLoading &&
             verifiedTokens.map((token: string) => (
               <Box
                 key={token}
                 onClick={() => handleTokenSelection(token)}
-                className={styles.tokenButton}
-                flexBasis={["50%", "30%", "20%"]}
+                className={`${styles.tokenButton} ${
+                  selectedToken === token ? styles.selectedToken : ""
+                }`}
+                flexBasis={["100%", "50%", "30%", "20%"]}
                 padding={2}
               >
                 <TokenSelection
@@ -71,81 +85,75 @@ export default function TransferCard() {
               </Box>
             ))}
         </Flex>
+      </FormControl>
 
-        <TokenBalance tokenAddress={selectedToken} />
-        
-        <div className={styles.inputGroup}>
-          <Text className={styles.label}>Send To:</Text>
-          <Input
-            placeholder="e.g., 0x1234567890abcdef..."
-            type="text"
-            value={formData.receiver}
-            required
-            className={styles.input}
-            onChange={(event) => handleChange(event, "receiver")}
+      <TokenBalance tokenAddress={selectedToken} />
+
+      <FormControl mb={4}>
+        <FormLabel>Send To:</FormLabel>
+        <Input
+          placeholder="e.g., 0x1234567890abcdef..."
+          type="text"
+          value={formData.receiver}
+          required
+          onChange={(event) => handleChange(event, "receiver")}
+        />
+      </FormControl>
+
+      <FormControl mb={4}>
+        <FormLabel>Amount:</FormLabel>
+        <Input
+          placeholder="0.0"
+          type="number"
+          value={formData.amount}
+          required
+          onChange={(event) => handleChange(event, "amount")}
+        />
+      </FormControl>
+
+      <FormControl mb={4}>
+        <FormLabel>Message: (Optional)</FormLabel>
+        <Input
+          placeholder="Add a short message here."
+          type="text"
+          value={formData.message}
+          onChange={(event) => handleChange(event, "message")}
+        />
+      </FormControl>
+
+      <Flex justifyContent="center" mt={4}>
+        {address ? (
+          <TransferButton
+            tokenAddress={selectedToken}
+            receiver={formData.receiver}
+            amount={formData.amount.toString()}
+            message={formData.message}
           />
-        </div>
-
-        <div className={styles.inputGroup}>
-          <Text className={styles.label}>Amount:</Text>
-          <Input
-            placeholder="0.0"
-            type="number"
-            value={formData.amount}
-            required
-            className={styles.input}
-            onChange={(event) => handleChange(event, "amount")}
+        ) : (
+          <ConnectWallet
+            theme={"dark"}
+            btnTitle={"Click Me to Transfer"}
+            modalTitle={"Login"}
+            switchToActiveChain={true}
+            modalSize={"wide"}
+            welcomeScreen={{
+              img: {
+                src:
+                  "https://raw.githubusercontent.com/getdemarked/Crest-App/main/public/crest_icon_logo_colored_nobg.png",
+                width: 150,
+                height: 150,
+              },
+              subtitle: "Login to transfer assets",
+            }}
+            modalTitleIconUrl={
+              "https://raw.githubusercontent.com/getdemarked/Crest-App/main/public/favicon.ico"
+            }
+            detailsBtn={() => {
+              return <Text></Text>;
+            }}
           />
-        </div>
-
-        <div className={styles.inputGroup}>
-          <Text className={styles.label}>Message: (Optional)</Text>
-          <Input
-            placeholder="Add a short message here."
-            type="text"
-            value={formData.message}
-            className={styles.input}
-            onChange={(event) => handleChange(event, "message")}
-          />
-        </div>
-
-        <Box mt={4}>
-          {address ? (
-            <TransferButton
-              tokenAddress={selectedToken}
-              receiver={formData.receiver}
-              amount={formData.amount.toString()}
-              message={formData.message}
-            />
-          ) : (
-
-              <ConnectWallet 
-                theme={"dark"}
-                btnTitle={"Click Me to Transfer"}
-                modalTitle={"Login"}
-                switchToActiveChain={true}
-                modalSize={"wide"}
-                welcomeScreen={{
-                  img: {
-                    src: "https://raw.githubusercontent.com/getdemarked/Crest-App/main/public/crest_icon_logo_colored_nobg.png",
-                    width: 150,
-                    height: 150,
-                  },
-                  subtitle:
-                    "Login to transfer assets",
-                }}
-                modalTitleIconUrl={
-                  "https://raw.githubusercontent.com/getdemarked/Crest-App/main/public/favicon.ico"
-                }
-                detailsBtn={() => {
-                    return <Text></Text>;
-                }}
-        
-                />
-            
-          )}
-        </Box>
-      </Card>
-    </div>
+        )}
+      </Flex>
+    </Box>
   );
 }

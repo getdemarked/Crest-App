@@ -65,6 +65,9 @@ export default function Navbar() {
               <Link href={"/transfer"}>
                 <Text mr={8}>Transfer</Text>
               </Link>
+              <Link href={"/claim"}>
+                <Text mr={8}>Claim</Text>
+              </Link>
               <Link
                 target="_blank"
                 href={"https://www.facebook.com/messages/t/129861473549398"}
@@ -116,6 +119,9 @@ export default function Navbar() {
                   <>
                     <Link href={"/transfer"}>
                       <Text onClick={closeMenu}>Transfer</Text>
+                    </Link>
+                    <Link href={"/claim"}>
+                      <Text onClick={closeMenu}>Claim</Text>
                     </Link>
                     <Link
                       target="_blank"

@@ -36,16 +36,21 @@ const Home: NextPage = () => {
           
           <Stack spacing={4}>
             <Heading bgGradient='linear(to-l, #000000, #007639)' bgClip='text' fontWeight='extrabold' fontSize={{ base: "5xl", md: "6xl" }}>
-              Send Money to your Filipino Friends and Family from any Country with ease.
+            
+            The Simplest Way to Pay Your Friends
             </Heading>
             <Text fontSize={{ base: "md", md: "xl" }}>
-              Select from a selection of currency to transfer to your friends and
-              family. Write a message to go along with your fund transfer.
-              Login in your wallet to get started now!
+            Transfer funds globally and have the recipient receive the money instantly
             </Text>
+            <div 
+             style={{
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+            >
             <ConnectWallet 
         theme={"dark"}
-        btnTitle={"Create an Account Now!"}
+        btnTitle={"Login"}
         modalTitle={"Login"}
         switchToActiveChain={true}
         modalSize={"wide"}
@@ -65,7 +70,30 @@ const Home: NextPage = () => {
             return <Text></Text>;
         }}
 
-        />
+        /> <span></span>
+        <ConnectWallet 
+        theme={"dark"}
+        btnTitle={"Get Started"}
+        modalTitle={"Sign Up Now!"}
+        switchToActiveChain={true}
+        modalSize={"wide"}
+        welcomeScreen={{
+          img: {
+            src: "https://raw.githubusercontent.com/getdemarked/Crest-App/main/public/crest_icon_logo_colored_nobg.png",
+            width: 150,
+            height: 150,
+          },
+          subtitle:
+            "Sign up now to create an account",
+        }}
+        modalTitleIconUrl={
+          "https://raw.githubusercontent.com/getdemarked/Crest-App/main/public/favicon.ico"
+        }
+        detailsBtn={() => {
+            return <Text></Text>;
+        }}
+
+        /> </div>
           </Stack>
         </Flex>
       </Flex>
