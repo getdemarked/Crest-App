@@ -115,7 +115,7 @@ export default function TransferCard() {
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
   <ModalOverlay />
   <ModalContent>
-    <ModalHeader>Scan QR Code</ModalHeader>
+    <ModalHeader></ModalHeader>
     <ModalCloseButton />
     <ModalBody>
       <QRScanner />
