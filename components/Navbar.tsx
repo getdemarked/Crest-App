@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import {
   Container,
   Flex,
@@ -24,10 +24,26 @@ import {
 import Link from "next/link";
 import { FaBars } from "react-icons/fa";
 
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export default function Navbar() {
   const address = useAddress();
   const [isOpen, setIsOpen] = useState(false);
   const [isSmallerScreen] = useMediaQuery("(max-width: 768px)");
+  const [isToastShown, setIsToastShown] = useState(false);
+
+  useEffect(() => {
+    // Display a toast message when the component mounts
+    if (!isToastShown) {
+      toast.info("This project is under development and still in the alpha phase.", {
+        position: "top-center",
+        autoClose: false, // Set to false to allow manual closing
+        closeOnClick: false, // Set to false to prevent closing on click
+      });
+      setIsToastShown(true);
+    }
+  }, [isToastShown]);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -145,6 +161,7 @@ export default function Navbar() {
           </ModalContent>
         </Modal>
       </Flex>
+      <ToastContainer />
     </Container>
   );
 }
