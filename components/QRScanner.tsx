@@ -5,6 +5,7 @@ import { Box, Heading, Text, Button, useClipboard } from '@chakra-ui/react';
 
 function QRScanner() {
   const [scanResult, setScanResult] = useState<string | null>(null);
+  const [showWarning, setShowWarning] = useState(false); // New state for showing/hiding warning
   const { hasCopied, onCopy } = useClipboard(scanResult || '');
 
   useEffect(() => {
@@ -29,6 +30,7 @@ function QRScanner() {
         scanner.clear();
         setScanResult(result);
         isScanning = false;
+        setShowWarning(true); // Show warning when result is available
       }
     }
 
@@ -51,12 +53,17 @@ function QRScanner() {
 
   return (
     <Box textAlign="center" p={4}>
-      <Heading mb={4}>Scan QR to Copy UID</Heading>
+      <Heading mb={4}>Scan QR Now!</Heading>
       {scanResult ? (
         <Box>
           <Text>
             UID: <a href={scanResult}>{scanResult}</a>
           </Text>
+          {showWarning && (
+            <Text color="red" fontWeight="bold" mt={2}>
+              Warning: <br></br>Make sure you are sending it to the right person. <br></br>Review their UID first before copying.
+            </Text>
+          )}
           <Button mt={2} onClick={onCopy}>
             {hasCopied ? 'Copied!' : 'Copy UID'}
           </Button>
