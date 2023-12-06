@@ -20,9 +20,14 @@ export default function DepositPage() {
         setTimeout(() => setIsCopied(false), 3000); // Reset copied state after 3 seconds
     }
 
-    function truncateAddress(address: string) {
-        return `${address.substring(0, 6)}...${address.substring(address.length - 4)}`;
+    function truncateAddress(address: string | undefined) {
+        // Check if address is defined before using substring
+        if (address) {
+            return `${address.substring(0, 6)}...${address.substring(address.length - 4)}`;
+        }
+        return "N/A"; // or any default value if address is undefined
     }
+
     return (
         <Container maxW={"1440px"}>
             <Flex flexDirection={"column"} justifyContent={"center"} alignItems={"center"}>
@@ -36,7 +41,7 @@ export default function DepositPage() {
                                 borderRadius={4}
                                 pr={2}
                             >
-                                {truncateAddress(address as string)}
+                                {truncateAddress(address)}
                             </Text>
                         </Flex>
                         <Flex alignItems="center" mt={[4, 4, 0]}>
