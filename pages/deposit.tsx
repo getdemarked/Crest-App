@@ -26,22 +26,32 @@ const DepositPage = () => {
         address.length - 4
       )}`;
     }
-    return "N/A";
+    return "Please login first";
   };
 
   return (
     <Container maxW="full" p={[4, 6]}>
+
       <Flex
         flexDirection={["column", "column", "row"]}
         justifyContent="center"
         alignItems="center"
         textAlign="center"
       >
+     
         <Flex alignItems="center" mt={[4, 4, 0]} mb={[2, 2, 0]}>
+            <br></br>
           <Text as="b" fontSize={["lg", "xl"]}>
             UID
           </Text>{" "}
         </Flex>
+        </Flex>
+      <Flex
+        flexDirection={["column", "column", "row"]}
+        justifyContent="center"
+        alignItems="center"
+        textAlign="center"
+      >
         <Flex alignItems="center" mt={[4, 4, 0]} mb={[2, 2, 0]}>
           <Text
             fontSize={["sm", "md"]}
@@ -52,6 +62,14 @@ const DepositPage = () => {
             {truncateAddress(address)}
           </Text>
         </Flex>
+        </Flex>
+      <Flex
+        flexDirection={["column", "column", "row"]}
+        justifyContent="center"
+        alignItems="center"
+        textAlign="center"
+      >
+        <br></br>
         <Flex alignItems="center" mt={[4, 4, 0]} mb={[2, 2, 0]}>
           <Button size="sm" onClick={() => copyToClipboard(address as string)}>
             {isCopied ? "Copied!" : "Copy UID"}
