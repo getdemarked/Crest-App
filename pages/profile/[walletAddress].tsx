@@ -130,7 +130,7 @@ export default function AccountPage() {
   justifyContent="center"
   mt={[4, 4, 0]}
   mx={[2, 4, 8]} // Adjust the horizontal margins for responsiveness on smaller screens
-  width={["100%", "90%", "40%"]} // Adjust the width for responsiveness on smaller screens
+  width={["100%", "90%", "80%"]} // Adjust the width for responsiveness on smaller screens
 >
   <TransactionHistory />
 </Flex>
