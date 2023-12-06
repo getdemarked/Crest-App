@@ -101,7 +101,7 @@ const TransactionHistoryPage: React.FC = () => {
         <Text>No transactions found.</Text>
       ) : (
         <Box overflowX="auto" width="100%">
-          <SimpleGrid columns={[1, 1, 2]} spacing={4}>
+          <SimpleGrid columns={[1]} spacing={4}>
             {transactions.map((transaction) => (
               <Box key={transaction.tx_hash} className={styles.transactionItem}>
                 <Flex
