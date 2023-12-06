@@ -3,6 +3,7 @@ import { Avatar, Container, Flex, Heading, SimpleGrid, Spinner, Text, Button } f
 import { useAddress, useContract, useContractRead, useDisconnect, ConnectWallet, useOwnedNFTs  } from "@thirdweb-dev/react";
 import { TRANSFER_CONTRACT_ADDRESS } from "../../const/addresses";
 import BalanceCard from "../../components/BalanceCard";
+import TransactionHistory from "../../components/TransactionHistory";
 import ProfilePicture from "../../components/ProfilePicture";
 import { useQRCode } from "next-qrcode";
 
@@ -121,9 +122,23 @@ export default function AccountPage() {
                             <Spinner />
                         )}
                         </SimpleGrid>
+                     
                     </Flex>
+                    <Flex
+  direction="column"
+  alignItems="center"
+  justifyContent="center"
+  mt={[4, 4, 0]}
+  mx={[2, 4, 8]} // Adjust the horizontal margins for responsiveness on smaller screens
+  width={["100%", "90%", "40%"]} // Adjust the width for responsiveness on smaller screens
+>
+  <TransactionHistory />
+</Flex>
 
+                    
+                    
                 </Flex>
+                
             ) : (
                 <Flex justifyContent="center" alignItems="center" height="100vh">
                     <ConnectWallet 
@@ -152,6 +167,9 @@ export default function AccountPage() {
                 </Flex>
                 
             )}
+
+        
+
 
 
             
