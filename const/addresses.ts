@@ -2,7 +2,7 @@ export const TRANSFER_CONTRACT_ADDRESS = '0xF9DeC9D4dd19b654857D016E40B7b45DfBa8
 export const CALIM_TOKEN_CONTRACT_ADDRESS = '0xf4ED0ba75DfA2D64828e9F6cd280fB660Bc09908';
 
 export const FEE_TOKEN_ADDRESS = '0xf4ED0ba75DfA2D64828e9F6cd280fB660Bc09908';
-export const FEE_AMOUNT = '10';
+export const FEE_AMOUNT = '0';
 export const FEE_RECEIVER = '0x723A159B280E23889E78ae3c397b52cca21eCd3b';
 
 export const HERO_IMAGE_URL = 'ipfs://QmUWVRuyFuVfo45estsJt2VaQUSEc4uwcPoeWFaeYxERua/seanwatase_isometric_crypto_transferring_from_one_wallet_to_ano_96084ff1-fe03-4dfd-8783-a3ecc85a24da.png';
