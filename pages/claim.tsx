@@ -7,7 +7,7 @@ export default function ClaimPage() {
 
     const { data: contractMetadata } = useContractMetadata(contract);
 
-    const claimAmount = 200;
+    const claimAmount = 50;
     const toast = useToast();
 
     return (
