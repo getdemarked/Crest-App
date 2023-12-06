@@ -40,7 +40,7 @@ export default function DepositPage() {
                             </Text>
                         </Flex>
                         <Flex alignItems="center" mt={[4, 4, 0]}>
-                            <Button size="sm" onClick={() => copyToClipboard(address)}>
+                            <Button size="sm" onClick={() => copyToClipboard(address as string)}>
                                 {isCopied ? "Copied!" : "Copy UID"}
                             </Button>
                         </Flex>
