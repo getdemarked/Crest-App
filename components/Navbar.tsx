@@ -84,17 +84,11 @@ export default function Navbar() {
               <Link href={"/claim"}>
                 <Text mr={8}>Claim</Text>
               </Link>
-              <Link
-                target="_blank"
-                href={"https://www.facebook.com/messages/t/129861473549398"}
-              >
+              <Link href={"/deposit"}>
                 <Text mr={8}>Deposit</Text>
               </Link>
-              <Link
-                target="_blank"
-                href={"https://www.facebook.com/messages/t/129861473549398"}
-              >
-                <Text mr={8}>Withdraw</Text>
+              <Link href={"/withdraw"}>
+                <Text mr={8}>Wihtdraw</Text>
               </Link>
               <Link href={`/profile/${address}`}>
                 <Text>My Wallet</Text>
@@ -139,16 +133,10 @@ export default function Navbar() {
                     <Link href={"/claim"}>
                       <Text onClick={closeMenu}>Claim</Text>
                     </Link>
-                    <Link
-                      target="_blank"
-                      href={"https://www.facebook.com/messages/t/129861473549398"}
-                    >
+                    <Link href={"/deposit"}>
                       <Text onClick={closeMenu}>Deposit</Text>
                     </Link>
-                    <Link
-                      target="_blank"
-                      href={"https://www.facebook.com/messages/t/129861473549398"}
-                    >
+                    <Link href={"/withdraw"}>
                       <Text onClick={closeMenu}>Withdraw</Text>
                     </Link>
                     <Link href={`/profile/${address}`}>
