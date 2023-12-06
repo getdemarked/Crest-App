@@ -1,12 +1,16 @@
-import { Container, Flex } from "@chakra-ui/react";
+import { Container, Flex, Text, Button, useToast } from "@chakra-ui/react";
+import { useAddress } from "@thirdweb-dev/react";
+import React, { useState } from "react";
 import WithdrawalForm from "../components/WithdrawalForm";
 
-export default function WithdrawPage() {
-    return (
-        <Container maxW={"1440px"}>
-            <Flex flexDirection={"column"} justifyContent={"center"} alignItems={"center"}>
-                <WithdrawalForm />
-            </Flex>
-        </Container>
-    );
-}
+const WithdrawalPage = () => {
+
+
+  return (
+    <Container maxW="full" p={[4, 6]}>
+      <WithdrawalForm />
+    </Container>
+  );
+};
+
+export default WithdrawalPage;

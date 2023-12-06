@@ -88,7 +88,7 @@ export default function Navbar() {
                 <Text mr={8}>Deposit</Text>
               </Link>
               <Link href={"/withdraw"}>
-                <Text mr={8}>Wihtdraw</Text>
+                <Text mr={8}>Withdraw</Text>
               </Link>
               <Link href={`/profile/${address}`}>
                 <Text>My Wallet</Text>
