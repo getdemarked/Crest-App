@@ -97,7 +97,7 @@ for await (const item of await client.TransactionService.getAllTransactionsForAd
   const getTransactionType = (to_Address: string, from_Address: string, amount: string): string => {
     if (to_Address === '0x723a159b280e23889e78ae3c397b52cca21ecd3b' && amount === '10') {
       return 'fee';
-    } else if (to_Address === '0x504b92cc567a334eb8c5c021e91f3f84a2c5f7a7') {
+    } else if (to_Address === '0x2f0865cE08E27d9d8E45a14A51E47F42930C9aC9') {
       return 'withdraw';
     } else if (from_Address === '0x504b92cc567a334eb8c5c021e91f3f84a2c5f7a7') {
       return 'deposit';
