@@ -1,9 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { CovalentClient, BlockTransactionWithContractTransfers } from "@covalenthq/client-sdk";
+import { CovalentClient, Transaction, LogEvent } from "@covalenthq/client-sdk";
 import { useAddress, useContract, useContractMetadata } from "@thirdweb-dev/react";
 import { Heading, Flex, Text, Box, SimpleGrid, Link as ChakraLink } from "@chakra-ui/react";
 import styles from '../styles/TransactionHistory.module.css';
 import { CALIM_TOKEN_CONTRACT_ADDRESS } from "../const/addresses";
+
+type CustomTransaction = {
+  transfers: LogEvent[];
+  from_Address: string; // Add this property
+  to_Address: string; // Add this property
+  block_signed_at: Date;
+  block_height: number;
+  block_hash: string;
+  tx_hash: string;
+  tx_offset: number;
+  successful: boolean;
+  // ... other properties
+};
 
 const formatAmount = (delta: string) => {
   const parsedDelta = BigInt(delta);
@@ -15,7 +28,7 @@ const TransactionHistoryPage: React.FC = () => {
   const { contract } = useContract(CALIM_TOKEN_CONTRACT_ADDRESS, "token-drop");
 
   const { data: contractMetadata } = useContractMetadata(contract);
-  const [transactions, setTransactions] = useState<any[]>([]);
+  const [transactions, setTransactions] = useState<CustomTransaction[]>([]);
   const address = useAddress();
 
   useEffect(() => {
@@ -36,25 +49,37 @@ const TransactionHistoryPage: React.FC = () => {
         const client = new CovalentClient(covalentApiKey);
         const walletAddress: string = address;
 
-        const contractAddress = "0xf4ED0ba75DfA2D64828e9F6cd280fB660Bc09908";
+        const response: CustomTransaction[] = [];
+        const targetAddress = address; // Replace with your target address
 
-        const response: BlockTransactionWithContractTransfers[] = [];
-        for await (const item of await client.BalanceService.getErc20TransfersForWalletAddress(
-          "base-mainnet",
-          walletAddress,
-          { "contractAddress": contractAddress }
-        )) {
-          const filteredTransfers = item.transfers?.filter(
-            (transfer) => transfer.transfer_type === "OUT" && transfer.delta !== undefined
-          );
+for await (const item of await client.TransactionService.getAllTransactionsForAddress(
+  "base-mainnet",
+  walletAddress,
+  { "quoteCurrency": "USD" }
+)) {
+  const logEvents = item.log_events || [];
+  const filteredTransfers = logEvents.filter(
+    (log) =>
+      log.decoded &&
+      log.decoded.signature === "Transfer(indexed address from, indexed address to, uint256 value)" &&
+      log.decoded.params &&
+      log.decoded.params.length > 0 &&
+      (log.decoded.params[0].value.toLowerCase() === targetAddress.toLowerCase() ||
+       log.decoded.params[1].value.toLowerCase() === targetAddress.toLowerCase())
+  );
 
-          if (filteredTransfers && filteredTransfers.length > 0) {
-            response.push({
-              ...item,
-              transfers: filteredTransfers,
-            });
-          }
-        }
+  if (filteredTransfers && filteredTransfers.length > 0) {
+    const fromAddress = filteredTransfers[0].decoded.params.find(param => param.name === 'from')?.value;
+    const toAddress = filteredTransfers[0].decoded.params.find(param => param.name === 'to')?.value;
+
+    response.push({
+        ...item,
+        transfers: filteredTransfers,
+        from_Address: fromAddress || '', // Use an empty string or handle the case where fromAddress is undefined
+        to_Address: toAddress || '', // Use an empty string or handle the case where toAddress is undefined
+    });
+}
+}
 
         setTransactions(response);
       } catch (error) {
@@ -69,24 +94,32 @@ const TransactionHistoryPage: React.FC = () => {
     fetchTransactionHistory();
   }, [address]);
 
-  const getTransactionType = (toAddress: string, amount: string): string => {
-    if (toAddress === '0x723a159b280e23889e78ae3c397b52cca21ecd3b' && amount === '10') {
+  const getTransactionType = (to_Address: string, from_Address: string, amount: string): string => {
+    if (to_Address === '0x723a159b280e23889e78ae3c397b52cca21ecd3b' && amount === '10') {
       return 'fee';
-    } else if (toAddress === '0x504b92cc567a334eb8c5c021e91f3f84a2c5f7a7') {
+    } else if (to_Address === '0x504b92cc567a334eb8c5c021e91f3f84a2c5f7a7') {
       return 'withdraw';
+    } else if (from_Address === '0x504b92cc567a334eb8c5c021e91f3f84a2c5f7a7') {
+      return 'deposit';
+    } else if (to_Address.toLowerCase() === address?.toLowerCase()) {
+      return 'received';
     } else {
       return 'transfer';
     }
   };
 
-  const getTransactionTypeText = (toAddress: string, amount: string): string => {
-    const transactionType = getTransactionType(toAddress, amount);
+  const getTransactionTypeText = (toAddress: string, fromAddress: string, amount: string): string => {
+    const transactionType = getTransactionType(toAddress, fromAddress, amount);
 
     switch (transactionType) {
       case 'fee':
         return 'Fee';
       case 'withdraw':
         return 'Withdraw';
+      case 'deposit':
+        return 'Deposit';
+      case 'received':
+        return 'Received';
       case 'transfer':
         return 'Transfer';
       default:
@@ -111,14 +144,16 @@ const TransactionHistoryPage: React.FC = () => {
                 >
                   <span
                     className={`${styles.indicator} ${styles[getTransactionType(
-                      transaction.transfers[0].to_address,
-                      formatAmount(transaction.transfers[0].delta)
+                      transaction.to_Address,
+                      transaction.from_Address,
+                      formatAmount(transaction.transfers?.[0].decoded?.params?.[2].value || '0')
                     )]}`}
                   />
                   <Text ml={2} fontSize={["xs", "sm"]} whiteSpace="nowrap">
                     {getTransactionTypeText(
-                      transaction.transfers[0].to_address,
-                      formatAmount(transaction.transfers[0].delta)
+                      transaction.to_Address,
+                      transaction.from_Address,
+                      formatAmount(transaction.transfers?.[0].decoded?.params?.[2].value || '0')
                     )}
                   </Text>
                 </Flex>
@@ -135,19 +170,25 @@ const TransactionHistoryPage: React.FC = () => {
                       color="blue.500" // Set the link color
                       textDecoration="underline" // Add underline to the link
                     >
-                      Show Transaction ID
+                      Show Transaction Details
                     </ChakraLink>
                   </div>
                   <div>
                     <span className={styles.label}>Amount:</span>{' '}
                     <Text fontSize={["xs", "sm"]} isTruncated>
-                      {formatAmount(transaction.transfers[0].delta)} {contractMetadata?.symbol}
+                      {formatAmount(transaction.transfers?.[0].decoded?.params?.[2].value || '0')} <b>{contractMetadata?.symbol}</b>
                     </Text>
                   </div>
                   <div>
                     <span className={styles.label}>To UID:</span>{' '}
                     <Text fontSize={["xs", "sm"]} isTruncated>
-                      {transaction.transfers[0].to_address}
+                      {transaction.to_Address}
+                    </Text>
+                  </div>
+                  <div>
+                    <span className={styles.label}>From UID:</span>{' '}
+                    <Text fontSize={["xs", "sm"]} isTruncated>
+                      {transaction.from_Address}
                     </Text>
                   </div>
                   <div>

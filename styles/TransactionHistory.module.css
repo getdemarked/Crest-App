@@ -63,4 +63,12 @@
   .transfer {
     background-color: green;
   }
+
+  .deposit {
+    background-color: rgb(0, 191, 255);
+  }
+
+  .received {
+    background-color: rgb(60, 255, 0);
+  }
   
