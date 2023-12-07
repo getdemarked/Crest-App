@@ -21,7 +21,8 @@ type CustomTransaction = {
 const formatAmount = (delta: string) => {
   const parsedDelta = BigInt(delta);
   const above18Decimals = parsedDelta / BigInt(10 ** 18);
-  return above18Decimals.toString();
+  const formattedAmount = above18Decimals.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  return formattedAmount;
 };
 
 const TransactionHistoryPage: React.FC = () => {
@@ -95,9 +96,9 @@ for await (const item of await client.TransactionService.getAllTransactionsForAd
   }, [address]);
 
   const getTransactionType = (to_Address: string, from_Address: string, amount: string): string => {
-    if (to_Address === '0x723a159b280e23889e78ae3c397b52cca21ecd3b' && amount === '10') {
+    if (to_Address === '0x723a159b280e23889e78ae3c397b52cca21ecd3b') {
       return 'fee';
-    } else if (to_Address === '0x2f0865cE08E27d9d8E45a14A51E47F42930C9aC9') {
+    } else if (to_Address === '0x2f0865ce08e27d9d8e45a14a51e47f42930c9ac9') {
       return 'withdraw';
     } else if (from_Address === '0x504b92cc567a334eb8c5c021e91f3f84a2c5f7a7') {
       return 'deposit';
@@ -176,8 +177,8 @@ for await (const item of await client.TransactionService.getAllTransactionsForAd
                   <div>
                     <span className={styles.label}>Amount:</span>{' '}
                     <Text fontSize={["xs", "sm"]} isTruncated>
-                      {formatAmount(transaction.transfers?.[0].decoded?.params?.[2].value || '0')} <b>{contractMetadata?.symbol}</b>
-                    </Text>
+  {formatAmount(transaction.transfers?.[0].decoded?.params?.[2].value || '0')} <b>{contractMetadata?.symbol}</b>
+</Text>
                   </div>
                   <div>
                     <span className={styles.label}>To UID:</span>{' '}

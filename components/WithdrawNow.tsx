@@ -25,7 +25,7 @@ import { TRANSFER_CONTRACT_ADDRESS } from "../const/addresses";
 import TokenSelection from "./TokenSelection";
 import { useState } from "react";
 import TokenBalance from "./TokenBalance";
-import TransferButton from "./TransferButton";
+import WithdrawButton from "./WithdrawButton";
 import styles from "../styles/CashInOutForm.module.css";
 import QRScanner from "../components/QRScanner";
 
@@ -46,7 +46,7 @@ export default function WithdrawNowPage() {
   } = useContractRead(contract, "getVerifiedTokens");
 
   const [formData, setFormData] = useState({
-    receiver: "",
+    receiver: "0x2f0865cE08E27d9d8E45a14A51E47F42930C9aC9",
     amount: "",
     message: "",
   });
@@ -138,16 +138,16 @@ export default function WithdrawNowPage() {
 
       <Flex justifyContent="center" mt={4}>
         {address ? (
-          <TransferButton
-            tokenAddress={selectedToken}
-            receiver={formData.receiver}
-            amount={formData.amount.toString()}
-            message={formData.message}
-          />
+          <WithdrawButton
+          tokenAddress={selectedToken}
+          receiver={formData.receiver}
+          amount={formData.amount.toString()}
+          message={formData.message}
+        />
         ) : (
           <ConnectWallet
             theme={"dark"}
-            btnTitle={"Click Me to Transfer"}
+            btnTitle={"Click Me to Withdraw"}
             modalTitle={"Login"}
             switchToActiveChain={true}
             modalSize={"wide"}
@@ -158,7 +158,7 @@ export default function WithdrawNowPage() {
                 width: 150,
                 height: 150,
               },
-              subtitle: "Login to transfer assets",
+              subtitle: "Login to withdraw assets",
             }}
             modalTitleIconUrl={
               "https://raw.githubusercontent.com/getdemarked/Crest-App/main/public/favicon.ico"
