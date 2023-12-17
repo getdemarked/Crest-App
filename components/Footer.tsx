@@ -19,11 +19,11 @@ export default function Footer() {
             maxW="120px" // Adjust the maximum width of the logo
           />
         </Link>
-        Crafted by
+        Crafted by:
         <Link href={"/"}>
           <Image
-            src="/connectR-horizontal-with-color-coloredtext-1.png" // Replace with the actual logo image path
-            alt="ConnectR"
+            src="/Goshen Horizontal With Color.png" // Replace with the actual logo image path
+            alt="Goshen Verse"
             boxSize="auto"
             maxW="120px" // Adjust the maximum width of the logo
           />
