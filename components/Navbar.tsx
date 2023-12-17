@@ -1,4 +1,6 @@
-import React, { useState, useEffect} from "react";
+// components/Navbar.tsx
+
+import React, { useState, useEffect } from "react";
 import {
   Container,
   Flex,
@@ -11,7 +13,6 @@ import {
   ModalHeader,
   ModalCloseButton,
   ModalBody,
-  ModalFooter,
   Stack,
   useMediaQuery,
 } from "@chakra-ui/react";
@@ -27,20 +28,25 @@ import { FaBars } from "react-icons/fa";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export default function Navbar() {
+interface NavbarProps {}
+
+const Navbar: React.FC<NavbarProps> = () => {
   const address = useAddress();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isSmallerScreen] = useMediaQuery("(max-width: 768px)");
-  const [isToastShown, setIsToastShown] = useState(false);
+  const [isToastShown, setIsToastShown] = useState<boolean>(false);
 
   useEffect(() => {
     // Display a toast message when the component mounts
     if (!isToastShown) {
-      toast.info("This project is under development and still in the alpha phase.", {
-        position: "top-center",
-        autoClose: false, // Set to false to allow manual closing
-        closeOnClick: false, // Set to false to prevent closing on click
-      });
+      toast.info(
+        "This project is under development and still in the alpha phase.",
+        {
+          position: "top-center",
+          autoClose: false, // Set to false to allow manual closing
+          closeOnClick: false, // Set to false to prevent closing on click
+        }
+      );
       setIsToastShown(true);
     }
   }, [isToastShown]);
@@ -54,7 +60,15 @@ export default function Navbar() {
   };
 
   return (
-    <Container maxW={"1440px"} py={4}>
+    <Container
+      maxW={"100%"}
+      py={4}
+      position="sticky"
+      top={0}
+      zIndex={1000}
+      background="rgba(122, 218, 148, 0.1)" // Set the background color with opacity
+      backdropFilter="blur(8px)" // Set the blur effect
+    >
       <Flex
         flexDirection={"row"}
         justifyContent={"space-between"}
@@ -96,10 +110,13 @@ export default function Navbar() {
             </Flex>
           )
         )}
-        <Modal isOpen={isOpen} onClose={closeMenu} size="xs">
+        <Modal isOpen={isOpen} onClose={closeMenu} size="xs" >
           <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Menu</ModalHeader>
+          <ModalContent
+            background="rgba(0, 62, 17, 0.8)" // Set the modal background color with opacity
+            backdropFilter="blur(8px)" // Set the modal blur effect
+          >
+            <ModalHeader color="white">Menu</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
               <Stack spacing={4}>
@@ -128,19 +145,19 @@ export default function Navbar() {
                 {address && (
                   <>
                     <Link href={"/transfer"}>
-                      <Text onClick={closeMenu}>Transfer</Text>
+                      <Text color="white" onClick={closeMenu}>Transfer</Text>
                     </Link>
                     <Link href={"/claim"}>
-                      <Text onClick={closeMenu}>Claim</Text>
+                      <Text color="white" onClick={closeMenu}>Claim</Text>
                     </Link>
                     <Link href={"/deposit"}>
-                      <Text onClick={closeMenu}>Deposit</Text>
+                      <Text color="white" onClick={closeMenu}>Deposit</Text>
                     </Link>
                     <Link href={"/withdraw"}>
-                      <Text onClick={closeMenu}>Withdraw</Text>
+                      <Text color="white" onClick={closeMenu}>Withdraw</Text>
                     </Link>
                     <Link href={`/profile/${address}`}>
-                      <Text onClick={closeMenu}>My Wallet</Text>
+                      <Text color="white" onClick={closeMenu}>My Wallet</Text>
                     </Link>
                   </>
                 )}
@@ -152,4 +169,6 @@ export default function Navbar() {
       <ToastContainer />
     </Container>
   );
-}
+};
+
+export default Navbar;

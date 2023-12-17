@@ -17,6 +17,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Head from "next/head";
+import '/styles/global.css';
 
 // This is the chain your dApp will work on.
 // Change this to the chain your app is built for.
