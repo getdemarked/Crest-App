@@ -2,7 +2,7 @@
 
 import React from "react";
 import { NextPage } from "next";
-import { Container, Heading, Text, VStack } from "@chakra-ui/react";
+import { Container, Heading, Text, VStack, Link as ChakraLink } from "@chakra-ui/react";
 
 const PrivacyPolicy: NextPage = () => {
   return (
@@ -12,12 +12,16 @@ const PrivacyPolicy: NextPage = () => {
       </Heading>
       <VStack align="start" spacing={4}>
         <Text>
-          Your privacy is important to us. It is Goshen DAO's policy to respect
+          Your privacy is important to us. It is Goshen DAO&apos;s policy to respect
           your privacy regarding any information we may collect from you across
           our website,{" "}
-          <a href="https://www.goshendao.com" target="_blank" rel="noopener noreferrer">
+          <ChakraLink
+            href="https://www.goshendao.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             https://www.goshendao.com
-          </a>
+          </ChakraLink>
           , and other sites we own and operate.
         </Text>
         <Text>
@@ -52,7 +56,7 @@ const PrivacyPolicy: NextPage = () => {
           Your continued use of our website will be regarded as acceptance of our
           practices around privacy and personal information. If you have any
           questions about how we handle user data and personal information, feel
-          free to contact us.
+          free to <ChakraLink href="mailto:contact@goshendao.com">contact us</ChakraLink>.
         </Text>
       </VStack>
     </Container>
