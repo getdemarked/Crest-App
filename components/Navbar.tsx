@@ -40,7 +40,7 @@ const Navbar: React.FC<NavbarProps> = () => {
     // Display a toast message when the component mounts
     if (!isToastShown) {
       toast.info(
-        "This project is under development and still in the alpha phase.",
+        "This project is currently in the developmental stage and is in its alpha phase.",
         {
           position: "top-center",
           autoClose: false, // Set to false to allow manual closing
