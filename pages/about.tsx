@@ -14,8 +14,8 @@ const About: NextPage = () => {
       <VStack align="start" spacing={4}>
         <Text>
           Goshen DAO is a dynamic community dedicated to fostering collaboration,
-          creativity, and innovation in the decentralized world. Whether you're
-          an artist, developer, entrepreneur, or blockchain enthusiast, you've
+          creativity, and innovation in the decentralized world. Whether you&apos;re
+          an artist, developer, entrepreneur, or blockchain enthusiast, you&apos;ve
           found your digital home!
         </Text>
         <Heading as="h2" size="lg">
@@ -27,20 +27,19 @@ const About: NextPage = () => {
           ecosystem that empowers creators, disrupts the status quo, and
           unlocks new possibilities in the blockchain space.
         </Text>
-        </VStack>
-        <br></br><br></br><br></br>
-        <Center>
-          <Button
-            as={NextLink}
-            href="https://discord.gg/6XntnfTnUw"
-            target="_blank"
-            variant="solid"
-            colorScheme="teal"
-          >
-            Join our Discord
-          </Button>
-        </Center>
-      
+      </VStack>
+      <br></br><br></br><br></br>
+      <Center>
+        <Button
+          as={NextLink}
+          href="https://discord.gg/6XntnfTnUw"
+          target="_blank"
+          variant="solid"
+          colorScheme="teal"
+        >
+          Join our Discord
+        </Button>
+      </Center>
     </Container>
   );
 };
