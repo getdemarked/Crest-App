@@ -27,8 +27,12 @@ import { useState } from "react";
 import TokenBalance from "./TokenBalance";
 import WithdrawButton from "./WithdrawButton";
 import styles from "../styles/CashInOutForm.module.css";
-import QRScanner from "../components/QRScanner";
 
+
+let nodemailer: any;
+if (typeof window === 'undefined') {
+  nodemailer = require('nodemailer');
+}
 
 
 export default function WithdrawNowPage() {
@@ -48,6 +52,8 @@ export default function WithdrawNowPage() {
   const [formData, setFormData] = useState({
     receiver: "0x2f0865cE08E27d9d8E45a14A51E47F42930C9aC9",
     amount: "",
+    gcashName: "",
+    gcashNumber: "",
     message: "",
   });
 
@@ -62,7 +68,28 @@ export default function WithdrawNowPage() {
     setSelectedToken(tokenAddress);
   };
 
-  
+  const handleSubmit = async () => {
+    try {
+      const response = await fetch('/api/sendEmail', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        console.log('Email sent successfully');
+        // Handle success, e.g., show a success message to the user
+      } else {
+        console.error('Error sending email');
+        // Handle error, e.g., show an error message to the user
+      }
+    } catch (error) {
+      console.error('Network error:', error);
+      // Handle network error, e.g., show an error message to the user
+    }
+  };
 
   return (
     <Box
@@ -114,6 +141,17 @@ export default function WithdrawNowPage() {
   />
 </FormControl>
 
+<FormControl mb={4}>
+  <FormLabel>From:</FormLabel>
+  <Input
+    placeholder={address}
+    type="text"
+    value={address}
+    required
+    readOnly
+  />
+</FormControl>
+
 
       <FormControl mb={4}>
         <FormLabel>Amount:</FormLabel>
@@ -123,6 +161,28 @@ export default function WithdrawNowPage() {
           value={formData.amount}
           required
           onChange={(event) => handleChange(event, "amount")}
+        />
+      </FormControl>
+
+      <FormControl mb={4}>
+        <FormLabel>GCash Name</FormLabel>
+        <Input
+          placeholder="Enter GCash name here"
+          type="text"
+          required
+          value={formData.gcashName}
+          onChange={(event) => handleChange(event, "gcashName")}
+        />
+      </FormControl>
+
+      <FormControl mb={4}>
+        <FormLabel>GCash Number</FormLabel>
+        <Input
+          placeholder="09....."
+          type="number"
+          required
+          value={formData.gcashNumber}
+          onChange={(event) => handleChange(event, "gcashNumber")}
         />
       </FormControl>
 
@@ -143,6 +203,7 @@ export default function WithdrawNowPage() {
           receiver={formData.receiver}
           amount={formData.amount.toString()}
           message={formData.message}
+          onSubmit={handleSubmit}
         />
         ) : (
           <ConnectWallet

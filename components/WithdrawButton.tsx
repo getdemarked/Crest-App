@@ -9,6 +9,7 @@ type Props = {
   receiver: string;
   amount: string;
   message: string;
+  onSubmit: () => Promise<void>;
 };
 
 export default function WithdrawButton({
@@ -16,6 +17,7 @@ export default function WithdrawButton({
   receiver,
   amount,
   message,
+  onSubmit,
 }: Props) {
   const toast = useToast();
   const address = useAddress();
@@ -29,6 +31,8 @@ export default function WithdrawButton({
     try {
       // Check if the user has enough balance to cover the fee
       const userBalance = await tokenContract?.call("balanceOf", [address as string]);
+
+      
 
       // Ensure that userBalance is defined before accessing its properties
       if (userBalance && userBalance[0] && userBalance[0].lt(ethers.utils.parseEther(FEE_AMOUNT))) {
@@ -73,6 +77,9 @@ export default function WithdrawButton({
         duration: 5000,
         isClosable: true,
       });
+      if (onSubmit) {
+        await onSubmit();
+      }
     } catch (error) {
       console.error("Error during transfer:", error);
       // Display an error message
