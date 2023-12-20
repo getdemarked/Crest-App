@@ -59,7 +59,7 @@ const DepositPage = () => {
             borderRadius={4}
             p={2}
           >
-            {truncateAddress(address)}
+            {address}
           </Text>
         </Flex>
         </Flex>
