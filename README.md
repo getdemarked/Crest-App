@@ -1,40 +1,43 @@
+# Crest
+
+## Introduction
+
+Welcome to Crest, a blockchain-powered ecosystem that aims to enhance the traditional economy through tokenization and the implementation of real-world assets (RWA). Crest is designed to be a transparent, secure, and affordable platform, with a primary focus on revolutionizing international remittance services.
+
+## Features
+
+- **Tokenization:** Unlock the potential of real-world assets by tokenizing them on the blockchain.
+- **International Remittance:** Seamless and cost-effective cross-border transactions using blockchain technology.
+- **Decentralized Finance (DeFi):** Explore a comprehensive financial ecosystem with features like trade finance, crowdfunding, and decentralized finance applications.
+
 ## Getting Started
 
-Project for Token Transfer video on YouTube: (https://youtu.be/Eue8r1FjNqo)
+To get started with Crest, follow these steps:
 
-Project uses Chakra UI:
-```bash
-npm i @chakra-ui/react @emotion/react @emotion/styled framer-motion
+1. **Installation:** Clone the repository and install the necessary dependencies.
+
+   ```bash
+   git clone https://github.com/crest-project/crest.git
+   cd crest
+   yarn install
+   ```
+
+1. Configuration: Set up your configuration files and API keys.
+
+2. Run Crest: Launch Crest on your local environment.
+
 ```
-or
-```bash
-yarn add @chakra-ui/react @emotion/react @emotion/styled framer-motion
+npm run dev
 ```
+3. Explore the Documentation: Visit our documentation for in-depth information on using Crest.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Contributing
+We welcome contributions from the community! If you'd like to contribute to Crest, please follow our contribution guidelines.
 
-On `pages/_app.tsx`, you'll find our `ThirdwebProvider` wrapping your app, this is necessary for our [hooks](https://portal.thirdweb.com/react) and
-[UI Components](https://portal.thirdweb.com/ui-components) to work.
+## Support and Community
+- Issues: If you encounter any issues or bugs, please report them here.
+- Community Forum: Join the discussions on our community forum.
+- Chat: Connect with the community on our Discord channel.
 
-### Deploy to IPFS
-
-Deploy a copy of your application to IPFS using the following command:
-
-```bash
-yarn deploy
-```
-
-## Learn More
-
-To learn more about thirdweb and Next.js, take a look at the following resources:
-
-- [thirdweb React Documentation](https://docs.thirdweb.com/react) - learn about our React SDK.
-- [thirdweb TypeScript Documentation](https://docs.thirdweb.com/typescript) - learn about our JavaScript/TypeScript SDK.
-- [thirdweb Portal](https://docs.thirdweb.com) - check our guides and development resources.
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-
-You can check out [the thirdweb GitHub organization](https://github.com/thirdweb-dev) - your feedback and contributions are welcome!
-
-## Join our Discord!
-
-For any questions, suggestions, join our discord at [https://discord.gg/thirdweb](https://discord.gg/thirdweb).
+## License
+Crest is licensed under the MIT License.
