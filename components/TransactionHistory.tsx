@@ -1,21 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { CovalentClient, Transaction, LogEvent } from "@covalenthq/client-sdk";
+import { CovalentClient, LogEvent } from "@covalenthq/client-sdk";
 import { useAddress, useContract, useContractMetadata } from "@thirdweb-dev/react";
-import { Heading, Flex, Text, Box, SimpleGrid, Link as ChakraLink } from "@chakra-ui/react";
+import { Heading, Flex, Text, Box, SimpleGrid, Link as ChakraLink, Button } from "@chakra-ui/react";
 import styles from '../styles/TransactionHistory.module.css';
 import { CALIM_TOKEN_CONTRACT_ADDRESS } from "../const/addresses";
 
 type CustomTransaction = {
   transfers: LogEvent[];
-  from_Address: string; // Add this property
-  to_Address: string; // Add this property
+  from_Address: string;
+  to_Address: string;
   block_signed_at: Date;
   block_height: number;
   block_hash: string;
   tx_hash: string;
   tx_offset: number;
   successful: boolean;
-  // ... other properties
 };
 
 const formatAmount = (delta: string) => {
@@ -30,6 +29,8 @@ const TransactionHistoryPage: React.FC = () => {
 
   const { data: contractMetadata } = useContractMetadata(contract);
   const [transactions, setTransactions] = useState<CustomTransaction[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const transactionsPerPage = 5;
   const address = useAddress();
 
   useEffect(() => {
@@ -51,36 +52,36 @@ const TransactionHistoryPage: React.FC = () => {
         const walletAddress: string = address;
 
         const response: CustomTransaction[] = [];
-        const targetAddress = address; // Replace with your target address
+        const targetAddress = address;
 
-for await (const item of await client.TransactionService.getAllTransactionsForAddress(
-  "base-mainnet",
-  walletAddress,
-  { "quoteCurrency": "USD" }
-)) {
-  const logEvents = item.log_events || [];
-  const filteredTransfers = logEvents.filter(
-    (log) =>
-      log.decoded &&
-      log.decoded.signature === "Transfer(indexed address from, indexed address to, uint256 value)" &&
-      log.decoded.params &&
-      log.decoded.params.length > 0 &&
-      (log.decoded.params[0].value.toLowerCase() === targetAddress.toLowerCase() ||
-       log.decoded.params[1].value.toLowerCase() === targetAddress.toLowerCase())
-  );
+        for await (const item of await client.TransactionService.getAllTransactionsForAddress(
+          "base-mainnet",
+          walletAddress,
+          { "quoteCurrency": "USD" }
+        )) {
+          const logEvents = item.log_events || [];
+          const filteredTransfers = logEvents.filter(
+            (log) =>
+              log.decoded &&
+              log.decoded.signature === "Transfer(indexed address from, indexed address to, uint256 value)" &&
+              log.decoded.params &&
+              log.decoded.params.length > 0 &&
+              (log.decoded.params[0].value.toLowerCase() === targetAddress.toLowerCase() ||
+                log.decoded.params[1].value.toLowerCase() === targetAddress.toLowerCase())
+          );
 
-  if (filteredTransfers && filteredTransfers.length > 0) {
-    const fromAddress = filteredTransfers[0].decoded.params.find(param => param.name === 'from')?.value;
-    const toAddress = filteredTransfers[0].decoded.params.find(param => param.name === 'to')?.value;
+          if (filteredTransfers && filteredTransfers.length > 0) {
+            const fromAddress = filteredTransfers[0].decoded.params.find(param => param.name === 'from')?.value;
+            const toAddress = filteredTransfers[0].decoded.params.find(param => param.name === 'to')?.value;
 
-    response.push({
-        ...item,
-        transfers: filteredTransfers,
-        from_Address: fromAddress || '', // Use an empty string or handle the case where fromAddress is undefined
-        to_Address: toAddress || '', // Use an empty string or handle the case where toAddress is undefined
-    });
-}
-}
+            response.push({
+              ...item,
+              transfers: filteredTransfers,
+              from_Address: fromAddress || '',
+              to_Address: toAddress || '',
+            });
+          }
+        }
 
         setTransactions(response);
       } catch (error) {
@@ -93,7 +94,7 @@ for await (const item of await client.TransactionService.getAllTransactionsForAd
     };
 
     fetchTransactionHistory();
-  }, [address]);
+  }, [address, currentPage]);
 
   const getTransactionType = (to_Address: string, from_Address: string, amount: string): string => {
     if (to_Address === '0x723a159b280e23889e78ae3c397b52cca21ecd3b') {
@@ -126,6 +127,12 @@ for await (const item of await client.TransactionService.getAllTransactionsForAd
       default:
         return 'Unknown';
     }
+  };const handleNextPage = () => {
+    setCurrentPage((prevPage) => prevPage + 1);
+  };
+
+  const handlePrevPage = () => {
+    setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
   };
 
   return (
@@ -136,7 +143,7 @@ for await (const item of await client.TransactionService.getAllTransactionsForAd
       ) : (
         <Box overflowX="auto" width="100%">
           <SimpleGrid columns={[1]} spacing={4}>
-            {transactions.map((transaction) => (
+            {transactions.slice((currentPage - 1) * transactionsPerPage, currentPage * transactionsPerPage).map((transaction) => (
               <Box key={transaction.tx_hash} className={styles.transactionItem}>
                 <Flex
                   className={styles.indicatorContainer}
@@ -210,6 +217,14 @@ for await (const item of await client.TransactionService.getAllTransactionsForAd
               </Box>
             ))}
           </SimpleGrid>
+          <Flex justify="space-between" mt={4}>
+            <Button onClick={handlePrevPage} disabled={currentPage === 1}>
+              Previous
+            </Button>
+            <Button onClick={handleNextPage} disabled={transactions.length <= currentPage * transactionsPerPage}>
+              Next
+            </Button>
+          </Flex>
         </Box>
       )}
     </Flex>
