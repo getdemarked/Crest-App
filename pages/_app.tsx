@@ -18,6 +18,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Head from "next/head";
 import '/styles/global.css';
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 // This is the chain your dApp will work on.
 // Change this to the chain your app is built for.
@@ -100,6 +101,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Navbar />
         <Component {...pageProps} />
         <Footer />
+        <SpeedInsights />
       </ChakraProvider>
     </ThirdwebProvider>
   );

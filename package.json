@@ -19,6 +19,7 @@
     "@thirdweb-dev/sdk": "^4.0.22",
     "@thirdweb-dev/wallets": "^2.1.10",
     "@types/dom-to-image": "^2.6.7",
+    "@vercel/speed-insights": "^1.0.2",
     "dom-to-image": "^2.6.0",
     "ethers": "^5",
     "framer-motion": "^10.12.16",
