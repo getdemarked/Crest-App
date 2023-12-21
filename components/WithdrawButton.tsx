@@ -1,4 +1,6 @@
-import { Web3Button, useContract,useAddress } from "@thirdweb-dev/react";
+// WithdrawButton.tsx
+import React from "react";
+import { Web3Button, useContract, useAddress } from "@thirdweb-dev/react";
 import { TRANSFER_CONTRACT_ADDRESS, FEE_TOKEN_ADDRESS, FEE_AMOUNT, FEE_RECEIVER } from "../const/addresses";
 import { ethers } from "ethers";
 import { useToast } from "@chakra-ui/react";
@@ -9,6 +11,7 @@ type Props = {
   receiver: string;
   amount: string;
   message: string;
+  onSuccess?: () => void;
 };
 
 export default function WithdrawButton({
@@ -16,6 +19,7 @@ export default function WithdrawButton({
   receiver,
   amount,
   message,
+  onSuccess,
 }: Props) {
   const toast = useToast();
   const address = useAddress();
@@ -73,6 +77,11 @@ export default function WithdrawButton({
         duration: 5000,
         isClosable: true,
       });
+
+      // Call onSuccess callback if provided
+      if (onSuccess) {
+        onSuccess();
+      }
     } catch (error) {
       console.error("Error during transfer:", error);
       // Display an error message
@@ -88,14 +97,14 @@ export default function WithdrawButton({
 
   return (
     <Web3Button
-      theme="dark"
-      contractAddress={TRANSFER_CONTRACT_ADDRESS}
-      action={handleTransfer} // Use the handleTransfer function
-      onSubmit={() => console.log("Transaction submitted")}
-      onError={(error) => alert("Something went wrong!")}
-      className={styles.submitButton}
-    >
-      Withdraw
-    </Web3Button>
+    theme="dark"
+    contractAddress={TRANSFER_CONTRACT_ADDRESS}
+    action={handleTransfer} // Use the handleTransfer function
+    onSubmit={() => console.log("Transaction submitted")}
+    onError={(error) => alert("Something went wrong!")}
+    className={styles.submitButton}
+  >
+    Withdraw
+  </Web3Button>
   );
 }
